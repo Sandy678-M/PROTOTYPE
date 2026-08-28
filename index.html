@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediKiosk + LifeLink Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- =========================
+       TOP HEADER
+  ========================== -->
+  <header class="topbar">
+
+    <div class="brand">
+      <div class="logo">✚</div>
+
+      <div>
+        <h1>
+          MediKiosk <span>+</span> LifeLink
+        </h1>
+
+        <small>
+          AI-Powered Clinical Intake & Blood Support Platform
+        </small>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <span class="status-dot"></span>
+      <span>Demo System</span>
+
+      <button
+        class="outline-btn"
+        onclick="showToast('Demo session is active')">
+        Help
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       APPLICATION SHELL
+  ========================== -->
+  <div class="app-shell">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+    <aside class="sidebar">
+
+      <div class="core-badge">
+        ★ SIH 26047 · CORE
+      </div>
+
+
+      <!-- CORE SYSTEM -->
+
+      <button
+        class="nav active"
+        data-page="patient"
+        onclick="go('patient')">
+
+        👤 Patient Intake
+
+      </button>
+
+
+      <button
+        class="nav"
+        data-page="documents"
+        onclick="go('documents')">
+
+        📄 Documents
+
+      </button>
+
+
+      <button
+        class="nav"
+        data-page="summary"
+        onclick="go('summary')">
+
+        🧠 Case Summary
+
+      </button>
+
+
+      <button
+        class="nav"
+        data-page="doctor"
+        onclick="go('doctor')">
+
+        🩺 Doctor Dashboard
+
+      </button>
+
+
+      <button
+        class="nav"
+        data-page="timeline"
+        onclick="go('timeline')">
+
+        🕒 Medical Timeline
+
+      </button>
+
+
+      <div class="side-divider"></div>
+
+
+      <!-- OPTIONAL MODULE -->
+
+      <div class="optional-label">
+        OPTIONAL
+      </div>
+
+
+      <button
+        class="nav lifelink"
+        data-page="lifelink"
+        onclick="go('lifelink')">
+
+        🩸 LifeLink Blood Support
+
+      </button>
+
+
+      <!-- SUPPORTING AI -->
+
+      <div class="support-label">
+        SUPPORTING AI
+      </div>
+
+
+      <button
+        class="nav assistant"
+        data-page="assistant"
+        onclick="go('assistant')">
+
+        🤖 AI Clinical Assistant
+
+      </button>
+
+
+      <div class="side-divider"></div>
+
+
+      <!-- ADMIN -->
+
+      <button
+        class="nav"
+        data-page="admin"
+        onclick="go('admin')">
+
+        ⚙️ Admin
+
+      </button>
+
+
+      <!-- SAFETY MESSAGE -->
+
+      <div class="sidebar-note">
+
+        <b>Clinical Safety</b>
+
+        <p>
+          AI assists with intake, extraction and summarization.
+          The doctor reviews, edits and confirms the final record.
+        </p>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main">
+
+
+      <!-- =================================
+           PATIENT CLINICAL INTAKE
+      ================================== -->
+
+      <section
+        id="patient"
+        class="page active-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              CORE SYSTEM · SIH 26047
+            </span>
+
+            <h2>
+              Patient Clinical Intake
+            </h2>
+
+            <p>
+              Capture a structured history before the consultation.
+            </p>
+
+          </div>
+
+
+          <!-- STEP INDICATOR -->
+
+          <div class="stepper">
+
+            <span class="step done">
+              1
+            </span>
+
+            <i></i>
+
+            <span class="step done">
+              2
+            </span>
+
+            <i></i>
+
+            <span class="step active">
+              3
+            </span>
+
+            <i></i>
+
+            <span class="step">
+              4
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PATIENT IDENTIFICATION + WELCOME -->
+
+        <div class="grid two">
+
+
+          <!-- PATIENT IDENTIFICATION -->
+
+          <div class="card">
+
+            <div class="card-title">
+
+              <span>🌐</span>
+
+              <h3>
+                Patient Identification
+              </h3>
+
+            </div>
+
+
+            <label>
+              Language
+            </label>
+
+            <select id="language">
+
+              <option>
+                English
+              </option>
+
+              <option>
+                தமிழ் (Tamil)
+              </option>
+
+              <option>
+                हिन्दी (Hindi)
+              </option>
+
+              <option>
+                മലയാളം (Malayalam)
+              </option>
+
+            </select>
+
+
+            <label>
+              ABHA ID / Patient ID
+            </label>
+
+            <input
+              id="abha"
+              placeholder="Enter ABHA ID or demo patient ID"
+              value="ABHA-XXXX-2047"
+            />
+
+
+            <label>
+              Consent
+            </label>
+
+
+            <div class="consent">
+
+              <input
+                type="checkbox"
+                id="consent"
+                checked
+              />
+
+              <span>
+                I understand and consent to the collection
+                and secure processing of my health information.
+              </span>
+
+            </div>
+
+
+            <button
+              class="primary"
+              onclick="startInterview()">
+
+              Continue to AI Interview →
+
+            </button>
+
+          </div>
+
+
+
+          <!-- WELCOME CARD -->
+
+          <div class="card welcome-card">
+
+            <div class="illustration">
+              🧑‍⚕️
+            </div>
+
+            <h3>
+              Welcome to MediKiosk
+            </h3>
+
+            <p>
+              You can answer questions by
+              <b>speaking, tapping or typing</b>.
+              The system adapts the questions to your answers.
+            </p>
+
+
+            <div class="feature-row">
+
+              <span>
+                🎙️ Voice
+              </span>
+
+              <span>
+                👆 Touch
+              </span>
+
+              <span>
+                ⌨️ Text
+              </span>
+
+            </div>
+
+
+            <div class="safety-box">
+
+              ⚠️ If a potential emergency symptom is detected,
+              the system sends a priority alert to human triage staff.
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             AI INTERVIEW
+        ================================== -->
+
+        <div
+          id="interview"
+          class="card interview hidden">
+
+
+          <div class="interview-head">
+
+            <div>
+
+              <span class="eyebrow">
+                AI CLINICAL INTAKE
+              </span>
+
+              <h3 id="question-title">
+                What is your main complaint?
+              </h3>
+
+            </div>
+
+
+            <span class="mode-pill">
+              Adaptive Question Engine
+            </span>
+
+          </div>
+
+
+          <!-- PROGRESS BAR -->
+
+          <div class="progress">
+
+            <div id="progress-bar"></div>
+
+          </div>
+
+
+          <!-- QUESTION -->
+
+          <p id="question-text">
+
+            Please describe what brought you
+            to the hospital today.
+
+          </p>
+
+
+          <!-- ANSWER OPTIONS -->
+
+          <div
+            id="answers"
+            class="answer-grid">
+
+          </div>
+
+
+          <!-- TEXT / VOICE INPUT -->
+
+          <div class="input-row">
+
+            <input
+              id="free-answer"
+              placeholder="Type your answer..."
+            />
+
+
+            <button
+              class="voice"
+              onclick="simulateVoice()">
+
+              🎙️ Speak
+
+            </button>
+
+
+            <button
+              class="primary small"
+              onclick="nextQuestion()">
+
+              Next →
+
+            </button>
+
+          </div>
+
+
+          <!-- SAFETY INFORMATION -->
+
+          <div class="redflag-info">
+
+            AI safety check:
+            potential red flags are routed to human triage;
+            this prototype does not diagnose or prescribe.
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           MEDICAL DOCUMENTS
+      ================================== -->
+
+      <section
+        id="documents"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              DOCUMENT AI
+            </span>
+
+            <h2>
+              Medical Document Digitization
+            </h2>
+
+            <p>
+              Scan prior prescriptions,
+              lab reports and discharge summaries.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- DOCUMENT UPLOAD CARDS -->
+
+        <div class="upload-grid">
+
+
+          <!-- PRESCRIPTION -->
+
+          <div
+            class="upload-card"
+            onclick="simulateOCR('Prescription')">
+
+            <span>
+              💊
+            </span>
+
+            <h3>
+              Prescription
+            </h3>
+
+            <p>
+              Upload / Scan
+            </p>
+
+            <button class="secondary">
+              Choose Document
+            </button>
+
+          </div>
+
+
+
+          <!-- LAB REPORT -->
+
+          <div
+            class="upload-card"
+            onclick="simulateOCR('Lab Report')">
+
+            <span>
+              🧪
+            </span>
+
+            <h3>
+              Lab Report
+            </h3>
+
+            <p>
+              Upload / Scan
+            </p>
+
+            <button class="secondary">
+              Choose Document
+            </button>
+
+          </div>
+
+
+
+          <!-- DISCHARGE SUMMARY -->
+
+          <div
+            class="upload-card"
+            onclick="simulateOCR('Discharge Summary')">
+
+            <span>
+              🏥
+            </span>
+
+            <h3>
+              Discharge Summary
+            </h3>
+
+            <p>
+              Upload / Scan
+            </p>
+
+            <button class="secondary">
+              Choose Document
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- DOCUMENT AI PIPELINE -->
+
+        <div class="card">
+
+          <div class="card-title">
+
+            <span>
+              ✨
+            </span>
+
+            <h3>
+              Document AI Pipeline
+            </h3>
+
+          </div>
+
+
+          <div class="pipeline">
+
+            <span>
+              📷 Upload / Scan
+            </span>
+
+            <b>
+              →
+            </b>
+
+            <span>
+              🔎 OCR
+            </span>
+
+            <b>
+              →
+            </b>
+
+            <span>
+              🧬 Entity Extraction
+            </span>
+
+            <b>
+              →
+            </b>
+
+            <span>
+              📅 Timeline
+            </span>
+
+            <b>
+              →
+            </b>
+
+            <span>
+              ⚠️ Abnormal Values
+            </span>
+
+          </div>
+
+
+          <!-- OCR RESULT -->
+
+          <div
+            id="ocr-result"
+            class="ocr-result">
+
+            No document processed yet.
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           STRUCTURED CASE SUMMARY
+      ================================== -->
+
+      <section
+        id="summary"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              AI OUTPUT · DOCTOR CONTROL
+            </span>
+
+            <h2>
+              Structured Case Summary
+            </h2>
+
+            <p>
+              AI-generated draft combining interview
+              information and digitized documents.
+            </p>
+
+          </div>
+
+
+          <span class="doctor-control">
+
+            🩺 Doctor has final control
+
+          </span>
+
+        </div>
+
+
+
+        <div class="summary-grid">
+
+
+          <!-- CLINICAL SUMMARY -->
+
+          <div class="card">
+
+
+            <div class="summary-section">
+
+              <h3>
+                Chief Complaint
+              </h3>
+
+              <p id="summary-complaint">
+                Chest discomfort for 2 days.
+              </p>
+
+            </div>
+
+
+
+            <div class="summary-section">
+
+              <h3>
+                History of Present Illness
+              </h3>
+
+              <p>
+
+                Intermittent discomfort;
+                prototype data shown for demonstration.
+
+                Adaptive questioning can capture
+                onset, character, location,
+                duration and associated symptoms.
+
+              </p>
+
+            </div>
+
+
+
+            <div class="summary-section">
+
+              <h3>
+                Past Medical & Surgical History
+              </h3>
+
+              <p>
+                No confirmed information entered.
+              </p>
+
+            </div>
+
+
+
+            <div class="summary-section">
+
+              <h3>
+                Drug & Allergy History
+              </h3>
+
+              <p>
+                To be reviewed and confirmed by physician.
+              </p>
+
+            </div>
+
+
+
+            <div class="summary-section">
+
+              <h3>
+                Family / Personal History
+              </h3>
+
+              <p>
+                Pending structured intake.
+              </p>
+
+            </div>
+
+
+
+            <div class="summary-section">
+
+              <h3>
+                Review of Systems
+              </h3>
+
+              <p>
+                Pending structured intake.
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- SAFETY / PHYSICIAN CONTROL -->
+
+          <div class="card">
+
+            <h3>
+              AI Safety & Data Quality
+            </h3>
+
+
+            <div class="metric">
+
+              <span>
+                History completeness
+              </span>
+
+              <b>
+                82%
+              </b>
+
+            </div>
+
+
+            <div class="bar">
+
+              <i style="width:82%"></i>
+
+            </div>
+
+
+            <div class="alert success">
+
+              ✓ No confirmed emergency flag
+              in this demo session.
+
+            </div>
+
+
+            <div class="alert warning">
+
+              ! Extracted values should be verified
+              against the original document.
+
+            </div>
+
+
+            <h3 class="mt">
+              Physician Actions
+            </h3>
+
+
+            <button
+              class="primary full"
+              onclick="showToast('Summary marked ready for physician review')">
+
+              ✓ Review & Confirm
+
+            </button>
+
+
+            <button
+              class="secondary full"
+              onclick="showToast('Draft opened for editing')">
+
+              ✎ Edit AI Draft
+
+            </button>
+
+
+            <div class="ai-boundary">
+
+              AI assists;
+              it does <b>not</b> independently
+              diagnose or prescribe.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           DOCTOR DASHBOARD
+      ================================== -->
+
+      <section
+        id="doctor"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              PHYSICIAN WORKSPACE
+            </span>
+
+            <h2>
+              Doctor Dashboard
+            </h2>
+
+            <p>
+              Review, edit and confirm the patient record.
+            </p>
+
+          </div>
+
+
+          <button
+            class="primary"
+            onclick="go('summary')">
+
+            Open Current Case
+
+          </button>
+
+        </div>
+
+
+
+        <!-- DASHBOARD STATISTICS -->
+
+        <div class="stats">
+
+
+          <div class="stat">
+
+            <b>
+              24
+            </b>
+
+            <span>
+              Patients Today
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              7
+            </b>
+
+            <span>
+              Awaiting Review
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              2
+            </b>
+
+            <span>
+              Priority Alerts
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              18m
+            </b>
+
+            <span>
+              Time Saved
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PATIENT QUEUE -->
+
+        <div class="card table-card">
+
+          <h3>
+            Patient Queue
+          </h3>
+
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Patient
+                </th>
+
+                <th>
+                  Mode
+                </th>
+
+                <th>
+                  History
+                </th>
+
+                <th>
+                  Documents
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th></th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+              <tr>
+
+                <td>
+                  Demo Patient 01
+                </td>
+
+                <td>
+                  Voice + Touch
+                </td>
+
+                <td>
+                  82%
+                </td>
+
+                <td>
+                  3
+                </td>
+
+                <td>
+
+                  <span class="tag review">
+                    Review
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <button
+                    class="link-btn"
+                    onclick="go('summary')">
+
+                    Open
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+
+
+              <tr>
+
+                <td>
+                  Demo Patient 02
+                </td>
+
+                <td>
+                  Touch
+                </td>
+
+                <td>
+                  94%
+                </td>
+
+                <td>
+                  1
+                </td>
+
+                <td>
+
+                  <span class="tag ready">
+                    Ready
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <button class="link-btn">
+                    Open
+                  </button>
+
+                </td>
+
+              </tr>
+
+
+
+              <tr>
+
+                <td>
+                  Demo Patient 03
+                </td>
+
+                <td>
+                  Voice
+                </td>
+
+                <td>
+                  76%
+                </td>
+
+                <td>
+                  2
+                </td>
+
+                <td>
+
+                  <span class="tag alert">
+                    Priority
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <button
+                    class="link-btn"
+                    onclick="showToast('Priority case routed to human triage')">
+
+                    Triage
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           MEDICAL TIMELINE
+      ================================== -->
+
+      <section
+        id="timeline"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              PATIENT RECORD
+            </span>
+
+            <h2>
+              Medical Timeline
+            </h2>
+
+            <p>
+              Chronologically organized information
+              from the patient and digitized documents.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="card timeline">
+
+
+          <!-- EVENT 1 -->
+
+          <div class="event">
+
+            <div class="date">
+              28 AUG 2026
+            </div>
+
+            <div class="event-dot"></div>
+
+            <div>
+
+              <h3>
+                AI Clinical Intake
+              </h3>
+
+              <p>
+                Chief complaint and structured history
+                captured through voice/touch.
+              </p>
+
+              <span class="source">
+                MediKiosk
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- EVENT 2 -->
+
+          <div class="event">
+
+            <div class="date">
+              12 MAY 2026
+            </div>
+
+            <div class="event-dot"></div>
+
+            <div>
+
+              <h3>
+                Lab Report
+              </h3>
+
+              <p>
+                Selected values extracted through OCR.
+                Abnormal values require physician verification.
+              </p>
+
+              <span class="source">
+                Document AI
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- EVENT 3 -->
+
+          <div class="event">
+
+            <div class="date">
+              03 FEB 2026
+            </div>
+
+            <div class="event-dot"></div>
+
+            <div>
+
+              <h3>
+                Prescription
+              </h3>
+
+              <p>
+                Medication entities and date
+                extracted from uploaded document.
+              </p>
+
+              <span class="source">
+                OCR
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- EVENT 4 -->
+
+          <div class="event">
+
+            <div class="date">
+              19 NOV 2025
+            </div>
+
+            <div class="event-dot"></div>
+
+            <div>
+
+              <h3>
+                Discharge Summary
+              </h3>
+
+              <p>
+                Prior procedure and discharge
+                information digitized.
+              </p>
+
+              <span class="source">
+                Document AI
+              </span>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           LIFELINK
+      ================================== -->
+
+      <section
+        id="lifelink"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow optional">
+              OPTIONAL MODULE
+            </span>
+
+            <h2>
+              🩸 LifeLink Blood Support
+            </h2>
+
+            <p>
+              Activated when a doctor confirms
+              a blood support requirement.
+            </p>
+
+          </div>
+
+
+          <span class="optional-pill">
+            OPTIONAL
+          </span>
+
+        </div>
+
+
+
+        <!-- LIFELINK FLOW -->
+
+        <div class="lifelink-flow">
+
+
+          <div class="flow-step">
+
+            <b>1</b>
+
+            <span>
+              Doctor confirms blood support requirement
+            </span>
+
+          </div>
+
+
+          <i>
+            →
+          </i>
+
+
+          <div class="flow-step">
+
+            <b>2</b>
+
+            <span>
+              Blood group + location +
+              availability + eligibility
+            </span>
+
+          </div>
+
+
+          <i>
+            →
+          </i>
+
+
+          <div class="flow-step">
+
+            <b>3</b>
+
+            <span>
+              Donor matching
+            </span>
+
+          </div>
+
+
+          <i>
+            →
+          </i>
+
+
+          <div class="flow-step">
+
+            <b>4</b>
+
+            <span>
+              Contact / emergency coordination
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="grid two">
+
+
+          <!-- BLOOD REQUEST -->
+
+          <div class="card">
+
+            <h3>
+              Blood Support Request
+            </h3>
+
+
+            <label>
+              Blood Group
+            </label>
+
+            <select>
+
+              <option>
+                O+
+              </option>
+
+              <option>
+                A+
+              </option>
+
+              <option>
+                B+
+              </option>
+
+              <option>
+                AB+
+              </option>
+
+              <option>
+                O-
+              </option>
+
+            </select>
+
+
+            <label>
+              Location
+            </label>
+
+            <input
+              value="Current hospital location"
+            />
+
+
+            <label>
+              Units Required
+            </label>
+
+            <input
+              type="number"
+              value="1"
+              min="1"
+            />
+
+
+            <button
+              class="primary full"
+              onclick="matchDonors()">
+
+              Find Potential Donors
+
+            </button>
+
+          </div>
+
+
+
+          <!-- DONOR RESULTS -->
+
+          <div
+            class="card"
+            id="donor-results">
+
+            <h3>
+              Potential Donors / Support Options
+            </h3>
+
+            <p>
+              Run a matching request
+              to display demo results.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           AI CLINICAL ASSISTANT
+      ================================== -->
+
+      <section
+        id="assistant"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow supporting">
+              SUPPORTING MODULE
+            </span>
+
+            <h2>
+              🤖 AI Clinical Assistant
+            </h2>
+
+            <p>
+              Ask questions about the recorded
+              history and case summary.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="assistant-shell card">
+
+
+          <!-- ASSISTANT TOOLS -->
+
+          <div class="assistant-tools">
+
+
+            <button
+              class="tool active">
+
+              💬 Chat
+
+            </button>
+
+
+            <button
+              class="tool"
+              onclick="showToast('Voice review demo activated')">
+
+              🎙️ Voice Review
+
+            </button>
+
+
+            <button
+              class="tool"
+              onclick="showToast('History Q&A loaded')">
+
+              ❓ History Questions
+
+            </button>
+
+
+            <button
+              class="tool"
+              onclick="showToast('Summary explanation loaded')">
+
+              📋 Explain Summary
+
+            </button>
+
+          </div>
+
+
+
+          <!-- CHAT AREA -->
+
+          <div
+            id="chat"
+            class="chat">
+
+            <div class="bot">
+
+              Hello! I can explain the recorded history,
+              summarize extracted information,
+              or help identify items that need physician verification.
+
+              I do not diagnose or prescribe.
+
+            </div>
+
+          </div>
+
+
+
+          <!-- CHAT INPUT -->
+
+          <div class="chat-input">
+
+            <input
+              id="chatInput"
+              placeholder="Ask about the current patient record..."
+              onkeydown="if(event.key==='Enter') sendChat()"
+            />
+
+
+            <button
+              class="primary"
+              onclick="sendChat()">
+
+              Send
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================
+           ADMIN
+      ================================== -->
+
+      <section
+        id="admin"
+        class="page">
+
+
+        <div class="page-head">
+
+          <div>
+
+            <span class="eyebrow">
+              ADMIN
+            </span>
+
+            <h2>
+              Platform Administration
+            </h2>
+
+            <p>
+              Manage users, hospitals and high-level analytics.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ADMIN STATISTICS -->
+
+        <div class="stats">
+
+
+          <div class="stat">
+
+            <b>
+              128
+            </b>
+
+            <span>
+              Users
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              6
+            </b>
+
+            <span>
+              Hospitals
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              1,842
+            </b>
+
+            <span>
+              Intakes
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <b>
+              93%
+            </b>
+
+            <span>
+              Completion
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ADMIN CARDS -->
+
+        <div class="grid two">
+
+
+          <div class="card">
+
+            <h3>
+              Users
+            </h3>
+
+            <p>
+              Patients · Doctors · Admins / Staff
+            </p>
+
+            <button class="secondary">
+              Manage Users
+            </button>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              Hospitals
+            </h3>
+
+            <p>
+              Configure participating hospital locations.
+            </p>
+
+            <button class="secondary">
+              Manage Hospitals
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+
+  <!-- TOAST MESSAGE -->
+
+  <div
+    id="toast"
+    class="toast">
+  </div>
+
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="app.js"></script>
+
+</body>
+</html>
